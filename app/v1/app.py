@@ -2,14 +2,14 @@ from flask import Flask, jsonify, abort, make_response, request
 
 app = Flask(__name__)
 
-orders = []
+orders = [] 
 
-@app.route('/MkVII/api/v1/orders', methods=['GET'])
+@app.route('/api/v1/orders', methods=['GET'])
 def get_orders():
     return jsonify({'orders': orders})
 
 
-@app.route('/MkVII/api/v1/orders/<int:order_id>', methods=['GET'])
+@app.route('api/v1/orders/<int:order_id>', methods=['GET'])
 def get_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
@@ -22,7 +22,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/MkVII/api/v1/orders', methods=['POST'])
+@app.route('/api/v1/orders', methods=['POST'])
 def create_order():
     if not request.json or not 'meal' in request.json:
         abort(400)
@@ -36,7 +36,7 @@ def create_order():
     return jsonify({'order': order}), 201
 
 
-@app.route('/MkVII/api/v1/orders/<int:order_id>', methods=['PUT'])
+@app.route('/api/v1/orders/<int:order_id>', methods=['PUT'])
 def update_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
@@ -55,7 +55,7 @@ def update_order(order_id):
     return jsonify({'order': order[0]})
 
 
-@app.route('/MkVII/api/v1/orders/<int:order_id>', methods=['DELETE'])
+@app.route('/api/v1/orders/<int:order_id>', methods=['DELETE'])
 def delete_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
