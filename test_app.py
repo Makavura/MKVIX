@@ -14,22 +14,22 @@ class TestAll(unittest.TestCase):
                       "address": "Hunters Pub", "done": True}
 
   def test_get(self):
-    respond = self.client.get('/MkVII/api/v1/orders',
+    respond = self.client.get('/api/v1/orders',
                               headers={"content-type": "application/json"})
 
   def test_get(self):
-    respond = self.client.get('/MkVII/api/v1/orders/<int:order_id',
+    respond = self.client.get('/api/v1/orders/<int:order_id',
                               headers={"content-type": "application/json"})
 
   def test_post(self):
-    respond = self.client.post('/MkVII/api/v1/orders',
+    respond = self.client.post('/api/v1/orders',
                                headers={"content-type": "application/json"})
 
   def test_put(self):
-    respond = self.client.put('/MkVII/api/v1/orders/<int:order_id>',
+    respond = self.client.put('/api/v1/orders/<int:order_id>',
                               headers={"content-type": "application/json"})
 
   def test_delete(self):
-    respond = self.client.delete('/MkVII/api/v1/orders/<int:order_id>',
+    respond = self.client.delete('/api/v1/orders/<int:order_id>',
                                  headers={"content-type": "application/json"})
 
