@@ -21,7 +21,6 @@ Flask==0.12.2
 Flask-HTTPAuth==3.2.4
 Flask-RESTful==0.3.6
 funcsigs==1.0.2
-futures==3.2.0
 html5lib==0.999999999
 idna==2.6
 ipaddress==1.0.17
