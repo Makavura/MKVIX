@@ -9,7 +9,7 @@ def get_orders():
     return jsonify({'orders': orders})
 
 
-@app.route('api/v1/orders/<int:order_id>', methods=['GET'])
+@app.route('/api/v1/orders/<int:order_id>', methods=['GET'])
 def get_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
