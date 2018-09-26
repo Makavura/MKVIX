@@ -1,6 +1,8 @@
-from flask import Flask
 import unittest
 import json
+
+from api.__init__ import create_app
+
 
 class Testendpoints(unittest.TestCase):
     def setUp(self):
