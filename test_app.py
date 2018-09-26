@@ -33,6 +33,3 @@ class TestAll(unittest.TestCase):
     respond = self.client.delete('/MkVII/api/v1/orders/<int:order_id>',
                                  headers={"content-type": "application/json"})
 
-
-if __name__ == '__main__':
-  unittest.main()
