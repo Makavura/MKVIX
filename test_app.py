@@ -1,6 +1,6 @@
 import unittest
 import json
-from app import *
+from api.v1.app import *
 from api.__init__ import create_app
 
 
