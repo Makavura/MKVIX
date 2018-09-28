@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Makavura/MKVIX.svg?branch=develop-v1)](https://travis-ci.org/Makavura/MKVIX)
+[![Build Status](https://travis-ci.org/Makavura/Fast-Food-Fast-Endpoints.svg?branch=develop-v1)](https://travis-ci.org/Makavura/Fast-Food-Fast-Endpoints)
 [![Coverage Status](https://coveralls.io/repos/github/Makavura/Fast-Food-Fast-Endpoints/badge.svg?branch=develop-v1)](https://coveralls.io/github/Makavura/Fast-Food-Fast-Endpoints?branch=develop-v1)
 
 Backend API endpoints for Fast Food Fast app
