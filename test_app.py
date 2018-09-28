@@ -1,32 +1,33 @@
 import unittest
 import json
-from api.v1.app import *
-from api.__init__ import create_app
+from api.v1.app import app
 
 
 class Testendpoints(unittest.TestCase):
-    def setUp(self):
-        self.app = create_app("test")
-        self.client = self.app.test_client()
-        self.app_context = self.app.app_context()
-        self.app_context.push()
+  def setUp(self):
+    self.client = app.test_client()
+    
 
-    def test_get(self):
-        respond = self.client.get('/orders/api/v1/orders',
-                                  headers={"content-type": "application/json"})
+  def test_get_orders(self):
+    request = self.client.get('/orders/api/v1/orders/',
+                              headers={"content-type": "application/json"})
+    self.assertEqual(request.status_code, 200)
 
-    def test_get(self):
-        respond = self.client.get('/orders/api/v1/orders/<int:order_id',
-                                  headers={"content-type": "application/json"})
+  def test_get_order(self):
+    request = self.client.get('/orders/api/v1/orders/1/',
+                              headers={"content-type": "application/json"})
+    self.assertEqual(request.status_code, 200)
 
-    def test_post(self):
-        respond = self.client.post('/orders/api/v1/orders',
-                                   headers={"content-type": "application/json"})
+  def test_create_order(self):
+    data = {"meal": "codebalaa"}
+    request = self.client.post("/orders/api/v1/orders/",
+                               data=json.dumps(data), headers={"content-type": "application/json"})
+    print(request.data)
+    self.assertEqual(request.status_code, 201)
 
-    def test_put(self):
-        respond = self.client.put('/orders/api/v1/orders/<int:order_id>',
-                                  headers={"content-type": "application/json"})
-
-    def test_delete(self):
-        respond = self.client.delete('/orders/api/v1/orders/<int:order_id>',
-                                     headers={"content-type": "application/json"})
+  def test_update_order(self):
+    data = {'delivered': False}
+    request = self.client.put('/orders/api/v1/orders/2/',
+                              data=json.dumps(data), headers={"content-type": "application/json"})
+    print(request.data)
+    self.assertEqual(request.status_code, 200)
