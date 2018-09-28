@@ -10,6 +10,7 @@ install:
 script: 
   - coverage run -m --source api pytest
   - python -m coverage report -m
+  - pytest --cov=app
 
 
 after_success:
