@@ -26,5 +26,5 @@ https://fast-food-fast-mkix.herokuapp.com
 # Endpoints Documentation
 https://documenter.getpostman.com/view/5220160/RWgjYML4
 
-# Pivotal Tracker 
+# Pivotal Tracker Project Dashboard
 https://www.pivotaltracker.com/n/projects/2193657
