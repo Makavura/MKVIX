@@ -10,8 +10,6 @@ install:
 script: 
   - coverage run -m --source api pytest
   - python -m coverage report -m
-  
-after_success: 
   - coveralls
 
   
