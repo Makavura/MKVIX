@@ -19,12 +19,12 @@ orders = [
 ]
 
 
-@app.route('/orders/api/v1/orders', methods=['GET'])
+@app.route('/orders/api/v1/orders/', methods=['GET'])
 def get_orders():
     return make_response(jsonify({'orders': orders}), 200)
 
 
-@app.route('/orders/api/v1/orders/<int:order_id>', methods=['GET'])
+@app.route('/orders/api/v1/orders/<int:order_id>/', methods=['GET'])
 def get_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
@@ -37,7 +37,7 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-@app.route('/orders/api/v1/orders', methods=['POST'])
+@app.route('/orders/api/v1/orders/', methods=['POST'])
 def create_order():
     if not request.json or not 'meal' in request.json:
         abort(400)
@@ -51,17 +51,9 @@ def create_order():
     return make_response(jsonify({'order': order}), 201)
 
 
-@app.route('/orders/api/v1/orders/<int:order_id>', methods=['PUT'])
+@app.route('/orders/api/v1/orders/<int:order_id>/', methods=['PUT'])
 def update_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
-    if len(order) == 0:
-        abort(404)
-    if not request.json:
-        abort(400)
-    if 'meal' in request.json and type(request.json['meal']) != unicode:
-        abort(400)
-    if 'description' in request.json and type(request.json['description']) is not unicode:
-        abort(400)
     if 'delivered' in request.json and type(request.json['delivered']) is not bool:
         abort(400)
     order[0]['meal'] = request.json.get('meal', order[0]['meal'])
@@ -72,7 +64,7 @@ def update_order(order_id):
     return make_response(jsonify({'order': order[0]}), 200)
 
 
-@app.route('/orders/api/v1.0/orders/<int:order_id>', methods=['DELETE'])
+@app.route('/orders/api/v1.0/orders/<int:order_id>/', methods=['DELETE'])
 def delete_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
