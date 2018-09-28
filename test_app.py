@@ -22,10 +22,12 @@ class Testendpoints(unittest.TestCase):
     data = {"meal": "codebalaa"}
     request = self.client.post("/orders/api/v1/orders/",
                                data=json.dumps(data), headers={"content-type": "application/json"})
-       self.assertEqual(request.status_code, 201)
+    print(request.data)
+    self.assertEqual(request.status_code, 201)
 
   def test_update_order(self):
     data = {'delivered': False}
     request = self.client.put('/orders/api/v1/orders/2/',
                               data=json.dumps(data), headers={"content-type": "application/json"})
+    print(request.data)
     self.assertEqual(request.status_code, 200)
