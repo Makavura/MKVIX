@@ -32,9 +32,8 @@ class Testendpoints(unittest.TestCase):
     print(request.data)
     self.assertEqual(request.status_code, 200)
 
-    def test_delete_order(self):
+  def test_delete_order(self):
     request = self.client.delete('/orders/api/v1/orders/2/',
                               headers={"content-type": "application/json"})
-
     self.assertTrue(request.status_code, 200)
   
