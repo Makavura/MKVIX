@@ -21,7 +21,7 @@ orders = [
 
 @app.route('/orders/api/v1/orders', methods=['GET'])
 def get_orders():
-    return jsonify({'orders': orders}), 200
+    return make_response(jsonify({'orders': orders}), 200)
 
 
 @app.route('/orders/api/v1/orders/<int:order_id>', methods=['GET'])
@@ -29,7 +29,7 @@ def get_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
     if len(order) == 0:
         abort(404)
-    return jsonify({'order': order[0]}), 200
+    return make_response(jsonify({'order': order[0]}), 200)
 
 
 @app.errorhandler(404)
@@ -48,7 +48,7 @@ def create_order():
         'delivered': False
     }
     orders.append(order)
-    return jsonify({'order': order}), 201
+    return make_response(jsonify({'order': order}), 201)
 
 
 @app.route('/orders/api/v1/orders/<int:order_id>', methods=['PUT'])
@@ -69,7 +69,7 @@ def update_order(order_id):
         'description', order[0]['description'])
     order[0]['delivered'] = request.json.get(
         'delivered', order[0]['delivered'])
-    return jsonify({'order': order[0]}), 200
+    return make_response(jsonify({'order': order[0]}), 200)
 
 
 @app.route('/orders/api/v1.0/orders/<int:order_id>', methods=['DELETE'])
@@ -78,7 +78,7 @@ def delete_order(order_id):
     if len(order) == 0:
         abort(404)
     orders.remove(order[0])
-    return jsonify({'result': True}), 200
+    return make_response(jsonify({'delivered': True}), 200)
 
 
 if __name__ == '__main__':
