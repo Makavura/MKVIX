@@ -7,16 +7,25 @@ orders = [
     {
         'id': 1,
         'meal': 'ugali',
+        'price': 700,
         'description': 'staple meal',
-        'delivered': 'False'
+        'address': 'sete street',
+        'delivered': False
     },
     {
         'id': 2,
         'meal': 'sphagetti',
+        'price': 550,
+        'delivered': False,
         'description': 'chakula ya watoto',
-        'delivered': 'True'
+        'address': 'Yoyo street'
     }
 ]
+
+
+@app.route('/')
+def index():
+    return "Welcome To Fast Food Fast - A Delivery Service App!"
 
 
 @app.route('/orders/api/v1/orders/', methods=['GET'])
@@ -44,7 +53,7 @@ def create_order():
     order = {
         'id': orders[-1]['id'] + 1,
         'meal': request.json['meal'],
-        'description': request.json.get('description', ""),
+        'price': request.json.get('price', ""),
         'delivered': False
     }
     orders.append(order)
@@ -54,14 +63,32 @@ def create_order():
 @app.route('/orders/api/v1/orders/<int:order_id>/', methods=['PUT'])
 def update_order(order_id):
     order = [order for order in orders if order['id'] == order_id]
-    if 'delivered' in request.json and type(request.json['delivered']) is not bool:
+    if len(order) == 0:
+        abort(404)
+    if not request.json:
         abort(400)
+    if 'price' in request.json and type(request.json['price']) != int:
+        return make_response(jsonify({'please input a valid price, integers only, in json format'}))
+    if 'meal' in request.json and type(request.json['meal']) != unicode:
+        return make_response(jsonify({'please input a meal in json format'}))
+    if 'address' in request.json and type(request.json['adress']) is not unicode:
+        return make_response(jsonify({'Please input a valid address in json format'}))
+    if 'delivered' in request.json and type(request.json['delivered']) is not bool:
+        return make_response(jsonify({'Please input either true or false'}))
     order[0]['meal'] = request.json.get('meal', order[0]['meal'])
     order[0]['description'] = request.json.get(
         'description', order[0]['description'])
-    order[0]['delivered'] = request.json.get(
-        'delivered', order[0]['delivered'])
     return make_response(jsonify({'order': order[0]}), 200)
+
+
+@app.route('/orders/api/v1.0/orders/<int:order_id>', methods=['DELETE'])
+def delete_order(order_id):
+    order = [order for order in orders if order['id'] == order_id]
+    if len(order) == 0:
+        return make_response(jsonify({'order cannot be empty'}))
+    orders.remove(order[0])
+    return make_response(jsonify, ({'Order Deletion Succesful'}), 200)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
