@@ -62,7 +62,7 @@ six==1.11.0
 urllib3==1.23
 virtualenv==16.0.0
 webencodings==0.5
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 wrapt==1.9.0
 yarg==0.1.9
 Flask-Script==0.4.0
